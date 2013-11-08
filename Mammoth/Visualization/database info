@@ -1,0 +1,12 @@
+***DATABASE INFO***
+
+cemsdb.uvm.edu
+_snowcloud
+Username:            snowcloud_user         
+Password:            1pY+865D
+Privileges             Select
+
+Username:            snowcloud_admin
+Password:             Yq3:1GL8
+Privileges              Select,Insert,update,delete,create,alter
+

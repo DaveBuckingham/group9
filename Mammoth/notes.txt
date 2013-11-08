@@ -1,0 +1,35 @@
+This is a simple explainer of what all the files in this directory do.
+
+Usage for all of these files are simple
+eq: perl processData.pl 
+
+fixTimeStamps.pl
+----------------
+This script takes all of the epochs that are backlogged and have no time and matches correct times to them.  It uses the time entries for similar epochs that were taken from the live directory.
+To adapt it to various other time entries you will need to change the january dates in the queries that were used for these entries.
+
+functions.pl
+------------
+This script includes calibration entries and various functions in use throughout all the scripts.  
+
+insertRawData.pl
+----------------
+This script inserts data from files from the $dir directory.  that variable will need to be changed if neccessary.  File format is from files in http://cs.uvm.edu/~sgreenbe/swe/testlogs/testbed/ directory.  If this changes the regular expression will need to be changed
+
+insertBacklogData.pl
+--------------------
+This script takes backlog files from the $dir directory and inserts them into the db.  It also checks if that epoch has an entry in the database and if not inserts it with a null timestamp.
+
+processData.pl
+--------------
+This script takes all the raw data from the db, finds the median, and processes each for each channel.  It inserts the information then into the procesed data table in the db.
+
+processBacklogData.pl
+---------------------
+This script takes the raw backlog data from the db and processes it.  It takes this processed data and inserts this into the DB.
+
+insertNewBacklogData.pl
+-----------------------
+This script will take a folder of backlog files and insert them into the database.  It inserts them into the epoch table with times based off of the latest epoch times currently in the database.  It processes the data as well.
+
+If any questions arise about the scripts feel free to email me at jonathan.russo17@gmail.com 

@@ -1,0 +1,51 @@
+Snowcloud Visualizations
+By Ben Witte
+bjwitte@gmail.com
+
+Instalation: 
+1. Place snowcloud directory on public server.
+2. Give snowcloud_data.csv chmod 664
+3. Visit your new snowcloud/ url
+
+***Files***
+
+index.php - All processed data functions performed on single page. Functionality provided 
+            through series of include files based on user inputs.
+
+rawIndex.php - Same as above, but for Raw data.
+
+snowcloud.css - Visual Styling of HTML.
+
+snowcloud_data.csv - Output of CSV data. Must have chmod 664
+
+graph555.php - Separate unlinked page, Draws single Graph of 555 data.
+
+
+***Include files***
+
+connect.php - connects to database as read only user.
+
+template_header.php - header HTML and javascript
+
+template_footer.php - footer HTML
+
+functions.php - Includes functions:
+
+                createCSV(boolean $processed) - Fills single file with comma separated values of selected data. 
+                                                File snowcloud_data.csv must have 664 permissions on server.
+
+                drawTable(boolean $processed) - Fills HTML table with selected data.
+
+                graph(5 Parameters) - Draws sensor graphs based on data prepared in prepareGraphs.php
+                                      Parameters (unique chartID, unique HTMLContainerID, Title, Units, Data) see functions.php
+
+prepareGraphs.php - Selects data and fills data array for graph function. Graph function called for each modality.
+
+graphRaw.php - Draws single graph of Raw data based on selections, does not use prepareGraphs.php or graph() function
+
+
+***Sub-Directories***
+
+exporting-server/ - external link to highcharts download/print server.
+js/ - highcharts graphing js library and jquery datepicker
+css/ - css for datepicker

@@ -12,7 +12,7 @@ echo'
 /* Querys Towers to allow user selection, remembers past selections durring session */
 $query1 = "
       SELECT *
-      FROM nodes JOIN tower ON nodes.towerID = tower.towerID";
+      FROM group9_rawData;";
 
 $result = mysql_query("$query1") or die("Error: " . mysql_error());
 $towercount = array(0, 0, 0, 0);
@@ -20,10 +20,10 @@ $count = 0;
 
 while ($row = mysql_fetch_array($result)) {
 
-    $towerID = $row["towerID"];
-    $type = $row["type"];
-    $longitude = $row["long"];
-    $latitude = $row["lat"];
+    $towerID = $row["fldMote"];
+    //$type = $row["type"];
+    //$longitude = $row["long"];
+    //$latitude = $row["lat"];
 
     if ($towercount[$towerID] == 0 && $count == 0) {
 
@@ -92,14 +92,17 @@ if($_SERVER['REQUEST_METHOD'] != "POST")
 echo 'checked> <label for="csv">CSV:</label><input type=checkbox name="csv" value="yes" id="csv"';
 else echo'/> <label for="csv">CSV:</label><input type=checkbox name="csv" value="yes" id="csv"';
 
-if ($_POST["csv"] == 'yes')
+if ($_POST["csv"] == 'yes') {
     echo ' checked="checked"';
+}
 echo'/> <label for="table">Table:</label><input type=checkbox name="table" value="yes" id="table"';
-if ($_POST["table"] == 'yes')
+if ($_POST["table"] == 'yes') {
     echo ' checked="checked"';
+}
 echo'/></td></tr><tr><td colspan="4"><input type="submit" name="submitted" value="Submit" /><a style="float:right;" href="' . $_SERVER['PHP_SELF'] . '">Reset Fields</a></td></tr></table></form>';
 ?>
-<?php
+
+    <?php
 //Automatically query the server if a query hasn't already been made
 if($_SERVER['REQUEST_METHOD'] != "POST") {
  echo '<script>document.snowcloudinterface.submit();</script>';

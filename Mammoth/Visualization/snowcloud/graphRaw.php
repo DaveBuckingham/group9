@@ -18,22 +18,22 @@
 
 
 
-            $node = $row["node"];
+            $node = $row["fldMote"];
 
-            if ($row["sensor"] == 0) {
-                array_push($snowData["$node"], array($date, $row["avgdata"]));
-            } elseif ($row["sensor"] == 1) {
-                array_push($brainPARData["$node"], array($date, $row["avgdata"]));
-            } elseif ($row["sensor"] == 5) {
-                array_push($temperatureData["$node"], array($date, $row["avgdata"]));
-            } elseif ($row["sensor"] == 6) {
-                array_push($voltageData["$node"], array($date, $row["avgdata"]));
-            } elseif ($row["sensor"] == 2) {
-                array_push($groundPARData["$node"], array($date, $row["avgdata"]));
-            } elseif ($row["sensor"] == 3) {
-                array_push($soil1Data["$node"], array($date, $row["avgdata"]));
-            } elseif ($row["sensor"] == 4) {
-                array_push($soil2Data["$node"], array($date, $row["avgdata"]));
+            if ($row["fldChannel"] == 0) {
+                array_push($snowData["$node"], array($date, $row["fldData"]));
+            } elseif ($row["fldChannel"] == 1) {
+                array_push($brainPARData["$node"], array($date, $row["fldData"]));
+            } elseif ($row["fldChannel"] == 5) {
+                array_push($temperatureData["$node"], array($date, $row["fldData"]));
+            } elseif ($row["fldChannel"] == 6) {
+                array_push($voltageData["$node"], array($date, $row["fldData"]));
+            } elseif ($row["fldChannel"] == 2) {
+                array_push($groundPARData["$node"], array($date, $row["fldData"]));
+            } elseif ($row["fldChannel"] == 3) {
+                array_push($soil1Data["$node"], array($date, $row["fldData"]));
+            } elseif ($row["fldChannel"] == 4) {
+                array_push($soil2Data["$node"], array($date, $row["fldData"]));
             }
         }
 

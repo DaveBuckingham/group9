@@ -1,6 +1,9 @@
 <?php
     // Graphs raw data all modalities on single graph
-    include('queryRawData.php');
+    
+    $query = 'SELECT fldMote, fldChannel, AVG(fldData) as avgdata, '
+        . 'fldTimestamp FROM group9_rawData ' . $querynodes . ' '
+        . 'GROUP BY fldEpoch, fldChannel ORDER BY fldTimestamp, fldMote, fldChannel;';
 
     $result = mysql_query("$query") or die("Error: " . mysql_error());
     if (mysql_num_rows($result) > 0) {
@@ -14,30 +17,29 @@
         $soil2Data = array(4 => array(), 5 => array(), 6 => array());
         while ($row = mysql_fetch_array($result)) {
             date_default_timezone_set('UTC');
-            $date = (strtotime($row['time']) * 1000) - (strtotime('02-01-1970 00:00:00') * 1000);
+            $date = (strtotime($row['fldTimestamp']) * 1000) - (strtotime('02-01-1970 00:00:00') * 1000);
 
 
 
             $node = $row["fldMote"];
 
             if ($row["fldChannel"] == 0) {
-                array_push($snowData["$node"], array($date, $row["fldData"]));
+                array_push($snowData["$node"], array($date, $row["avgdata"]));
             } elseif ($row["fldChannel"] == 1) {
-                array_push($brainPARData["$node"], array($date, $row["fldData"]));
+                array_push($brainPARData["$node"], array($date, $row["avgdata"]));
             } elseif ($row["fldChannel"] == 5) {
-                array_push($temperatureData["$node"], array($date, $row["fldData"]));
+                array_push($temperatureData["$node"], array($date, $row["avgdata"]));
             } elseif ($row["fldChannel"] == 6) {
-                array_push($voltageData["$node"], array($date, $row["fldData"]));
+                array_push($voltageData["$node"], array($date, $row["avgdata"]));
             } elseif ($row["fldChannel"] == 2) {
-                array_push($groundPARData["$node"], array($date, $row["fldData"]));
+                array_push($groundPARData["$node"], array($date, $row["avgdata"]));
             } elseif ($row["fldChannel"] == 3) {
-                array_push($soil1Data["$node"], array($date, $row["fldData"]));
+                array_push($soil1Data["$node"], array($date, $row["avgdata"]));
             } elseif ($row["fldChannel"] == 4) {
-                array_push($soil2Data["$node"], array($date, $row["fldData"]));
+                array_push($soil2Data["$node"], array($date, $row["avgdata"]));
             }
         }
 
-        if (isset($_POST["sensors"])) {
 
             echo '
 <script type="text/javascript">
@@ -226,9 +228,8 @@ $(document).ready(function() {
 
 		</script>';
             echo '<div id="containerRaw" style="width: 1000px; height: 400px; margin: 50px auto"></div>';
-        }
     }
     else
-        echo 'No raw data available for your selection.';
+        echo '<br>No raw data available for your selection.';
 
 ?>

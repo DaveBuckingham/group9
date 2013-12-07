@@ -11,18 +11,18 @@ $endtime = htmlentities($endtime, ENT_QUOTES);
 $sensorcount = count($sensors);
 $towercount = count($towers);
 $querynodes = "";
-/*if ($towercount != 0) {
-    $querynodes = 'WHERE (fldMote = ' . $towers[0] . '';
+if ($towercount != 0) {
+    $querynodes = 'WHERE fldMote = "' . $towers[0] . '"';
     for ($i = 1; $i < $towercount; $i++) {
-        $querynodes .= ' OR fldMote = ' . $towers[$i] . '';
+        $querynodes .= ' OR fldMote = "' . $towers[$i] . '"';
     }
-    $querynodes .= ')';
+    //$querynodes .= ')';
     if ($sensorcount != 0) {
-        $querynodes .= ' AND (fldChannel = ' . $sensors[0] . '';
+        $querynodes .= ' AND fldChannel = "' . $sensors[0] . '"';
         for ($i = 1; $i < $sensorcount; $i++) {
-            $querynodes .= ' OR fldChannel = ' . $sensors[$i] . '';
+            $querynodes .= ' OR fldChannel = "' . $sensors[$i] . '"';
         }
-        $querynodes .= ')';
+        //$querynodes .= ')';
     }
 }
 if ($starttime != '' || $endtime != '') {
@@ -36,12 +36,10 @@ if ($starttime != '' || $endtime != '') {
     }
 }
 
-$query = '
-	SELECT fldMote, fldChannel, fldData, fldTimestamp, 
-	FROM group9_rawData ' . $querynodes . '
-	GROUP BY fldEpoch, fldChannel
-	ORDER BY fldTimestamp, fldMote, fldChannel';
- */?>
+$query = 'SELECT fldMote, fldChannel, AVG(fldData) as avgdata, '
+        . 'fldTimestamp FROM group9_rawData ' . $querynodes . ' '
+        . 'GROUP BY fldEpoch, fldChannel ORDER BY fldTimestamp, fldMote, fldChannel;';
+ ?>
 
 <?php
 /*$query = 'SELECT fldMote, fldChannel, fldData, fldTimestamp '
@@ -49,5 +47,6 @@ $query = '
         . 'AND 2013-11-17 05:00:00 GROUP BY fldEpoch, fldChannel '
         . 'ORDER BY fldTimestamp, fldMote, fldChannel;';*/
 
-$query = 'SELECT * FROM group9_rawData;';
+/*$query = 'SELECT fldMote, fldChannel, fldRecord, fldEpoch, '
+        . 'fldTimestamp, AVG(fldData) AS avgdata FROM group9_rawData;';*/
 ?>

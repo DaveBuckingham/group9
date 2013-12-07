@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Snowcloud Mammoth</title>
+        <title>CS 295: Snowcloud</title>
         <link href="snowcloud.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.8.16.custom.css" type="text/css" media="all" />
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js" type="text/javascript"></script>
@@ -27,8 +27,10 @@
                 });
             });
         </script>
+        
+        <meta http-equiv="refresh" content="15" />
+        
     </head>
     <body>
         <div class="wrapper">
-            <h1 style="margin-bottom:0px;" >Snowcloud Mammoth</h1>
-            <a href="index.php" class="topLink">Processed Data</a><span style="font-size:10px; font-weight:bold;"> | </span><a href="rawIndex.php" class="topLink">Raw Data</a>    
+            <h1 style="margin-bottom:0px;" >CS 295: Snowcloud</h1>  
